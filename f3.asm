@@ -1,8 +1,8 @@
 
 SECTION .text
 
-GLOBAL _f3
-_f3:
+GLOBAL f3
+f3:
     push ebp
     mov ebp, esp
     finit   
