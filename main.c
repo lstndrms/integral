@@ -10,6 +10,8 @@ int iters;
 
 
 void test(void);
+void atest(void);
+
 
 void help(void) {
     printf("-iters: show number of iterations\n");
@@ -17,6 +19,7 @@ void help(void) {
     printf("-test: call test\n");
     printf("-allfuncs: show all funcs\n");
     printf("-v: show task\n");
+    printf("-at: start automatic test\n");
 };
 
 
@@ -47,6 +50,10 @@ int main(int argc, char** argv) {
             }
             if (strcmp("-v", argv[i]) == 0) {
                 v();
+                return 0;
+            }
+            if (strcmp("-at", argv[i]) == 0) {
+                atest();
                 return 0;
             }
         }

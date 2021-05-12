@@ -4,16 +4,39 @@
 #include <assert.h>
 #include "flist.h"
 
+
+double t(double x) {
+    return x * x / 10 - x + 1;
+}
+
+double it(double x) {
+    return x * x * sin(x) * sin(x) * sin(x);
+}
+
 double t1(double x) {
     return x * x + 3 * x + 1;
 }
-
 double t2(double x) {
     return 1/x;
 }
 double t3(double x) {
     return cos(x);
 }
+
+void atest(void) {
+    printf("Root test\n");
+    double x = root(t, t3, 6.068, 10.0, 1e-5);
+    printf("function: x^2/10-x+1-cosx=0\n\troot: %lf; real root: 8.28697\n", x);
+    assert(fabs(x - 8.28697) < 1e-5);
+    printf("Root test: OK\n");
+    printf("Integral test\n");
+    x = integral(it, 0.0, 1.0, 1e-5);
+    printf("function: x^2sin^3x\n\tintegral[0, 1]: %lf; real integral: 0.11395\n", x);
+    assert(fabs(x -  0.11395) < 1e-5);
+    printf("Integral test: OK\n");
+    return ;
+};
+
 
 void test(void) {
     int type;
