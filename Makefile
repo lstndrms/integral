@@ -32,4 +32,4 @@ f3.o: f3.asm
 
 
 clean: 
-	del -f *.o
+	rm -rf *.o
