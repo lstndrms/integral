@@ -1,7 +1,7 @@
 SECTION .text
 
-GLOBAL _f1
-_f1:
+GLOBAL f1
+f1:
     push ebp
     mov ebp, esp
     finit   
