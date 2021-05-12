@@ -16,8 +16,13 @@ void help(void) {
     printf("-roots: show all roots\n");
     printf("-test: call test\n");
     printf("-allfuncs: show all funcs\n");
+    printf("-v: show task\n");
 };
 
+
+void v(void) {
+    printf("Task:\n\tfind curvelinear area\n\tfuncs: f1(x) = 3/((x-1)^2+1); f2(x) = sqrt(x+0.5); f3(x) = exp(-x)\nMethods:\n\tSimpson's rule\n\tSecant method");
+}
 
 int main(int argc, char** argv) {
     int showroots = 0, showiters = 0, showall = 0;
@@ -39,6 +44,10 @@ int main(int argc, char** argv) {
             }
             if (strcmp("-allfuncs", argv[i]) == 0) {
                 showall = 1;
+            }
+            if (strcmp("-v", argv[i]) == 0) {
+                v();
+                return 0;
             }
         }
     }
