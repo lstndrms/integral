@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
         printf("Funcs:\n\tf1(x) = 3/((x-1)^2+1)\n\tf2(x) = sqrt(x+0.5)\n\tf3(x) = exp(-x)\n");
     }
 
-    double x1 = root(f1, f2, 1, 4, EPS);
+    double x1 = root(f1, f2, 1.6, 4, EPS);
     if (showiters) printf("Iterations f1 = f2:   %d\n", iters);
 
     double x2 = root(f2, f3, 0, 1, EPS);
