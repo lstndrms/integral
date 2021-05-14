@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     double x2 = root(f2, f3, 0, 1, EPS);
     if (showiters) printf("Iterations f2 = f3:   %d\n", iters);
 
-    double x3 = root(f1, f3, -1, 4, EPS);
+    double x3 = root(f1, f3, -1, 1, EPS);
     if (showiters) printf("Iterations f1 = f3:   %d\n", iters);
 
     if (showroots) printf("Roots: f1=f2: %lf; f2=f3: %lf; f1=f3: %lf\n", x1, x2, x3);
