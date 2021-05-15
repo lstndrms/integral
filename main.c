@@ -9,7 +9,7 @@
 int iters;
 
 
-void test(void);
+void test(char* type, int n, double a, double b, double eps);
 void atest(void);
 
 
@@ -42,7 +42,30 @@ int main(int argc, char** argv) {
                 return 0;
             }
             if (strcmp("-test", argv[i]) == 0) {
-                test();
+                if (i + 5 < argc) {
+                    int n = 0;
+                    for (int j = 0;j < strlen(argv[i+2]);j++) {
+                        n = 10 * n + argv[i+1][j] - '0';
+                    }
+                    printf("!!%d!!!", n);
+                    char *end;
+                    double a = strtod(argv[i+3], &end);
+                    if (a == 0) {
+                        printf("Error");
+                        return 0;
+                    }
+                    double b = strtod(argv[i+4], &end);
+                    if (b == 0) {
+                        printf("Error");
+                        return 0;
+                    }
+                    double eps = strtod(argv[i+5], &end);
+                    if (eps == 0) {
+                        printf("Error");
+                        return 0;
+                    }
+                    test(argv[i+1], n, a, b, eps);
+                }
                 return 0;
             }
             if (strcmp("-allfuncs", argv[i]) == 0) {

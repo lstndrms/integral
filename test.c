@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <assert.h>
+#include <string.h>
 #include "flist.h"
 
 
@@ -110,19 +110,12 @@ void atest(void) {
 };
 
 
-void test(void) {
-    int type;
-    printf("Test type: \n\t1: root\n\t2: integral\n");
-    scanf("%d", &type);
-    if (type == 1) {
-        int n;
-        printf("Options are: \n\t1: x^2+3x+1=1/x\n\t2: 1/x=cosx\n\t3: cosx=x^2+3x+1\n");
-        scanf("%d", &n);
-        double a, b, eps;
-        printf("Interval [a, b]: ");
-        scanf("%lf%lf", &a, &b);
-        printf("EPS: ");
-        scanf("%lf", &eps);
+void test(char* type, int n, double a, double b, double eps) {
+    printf("Test type: \n\t1: root\n\t2: integral\n%s\n", type);
+    if (strcmp(type, "1") == 0) {
+        printf("Options are: \n\t1: x^2+3x+1=1/x\n\t2: 1/x=cosx\n\t3: cosx=x^2+3x+1\n%d\n", n);
+        printf("Interval [%lf, %lf]\n", a, b);
+        printf("EPS: %lf\n", eps);
         switch(n) {
             case 1:
                 printf("Root: %lf\n", root(t1, t2, a, b, eps));
@@ -137,15 +130,10 @@ void test(void) {
                 printf("Error\n");
         }
     }
-    else if (type == 2) {
-        int n;
-        printf("Options are: \n\t1: f(x)=x^2+3x+1\n\t2: f(x)=1/x\n\t3: f(x)=cosx\n");
-        scanf("%d", &n);
-        double a, b, eps;
-        printf("Interval [a, b]: ");
-        scanf("%lf%lf", &a, &b);
-        printf("EPS: ");
-        scanf("%lf", &eps);
+    else if (strcmp(type, "2") == 0) {
+        printf("Options are: \n\t1: x^2+3x+1=1/x\n\t2: 1/x=cosx\n\t3: cosx=x^2+3x+1\n%d\n", n);
+        printf("Interval [%lf, %lf]\n", a, b);
+        printf("EPS: %lf\n", eps);
         switch(n) {
             case 1:
                 printf("Inregral: %lf\n", integral(t1, a, b, eps));
