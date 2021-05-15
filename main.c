@@ -24,7 +24,7 @@ void help(void) {
 
 
 void v(void) {
-    printf("Task:\n\tfind curvelinear area\n\tfuncs: f1(x) = 3/((x-1)^2+1); f2(x) = sqrt(x+0.5); f3(x) = exp(-x)\nMethods:\n\tSimpson's rule\n\tSecant method");
+    printf("Task:\n\tfind curvelinear area\n\tfuncs: f1(x) = 3/((x-1)^2+1); f2(x) = sqrt(x+0.5); f3(x) = exp(-x)\nMethods:\n\tSimpson's rule\n\tSecant method\n");
 }
 
 int main(int argc, char** argv) {
@@ -50,7 +50,6 @@ int main(int argc, char** argv) {
             }
             if (strcmp("-v", argv[i]) == 0) {
                 v();
-                return 0;
             }
             if (strcmp("-at", argv[i]) == 0) {
                 atest();
