@@ -16,7 +16,7 @@ void atest(void);
 void help(void) {
     printf("-iters: show number of iterations\n");
     printf("-roots: show all roots\n");
-    printf("-test: call test\n");
+    printf("-test [type{1, 2}, number of func{1, 2, 3}, a, b ,eps]: call test\n");
     printf("-allfuncs: show all funcs\n");
     printf("-v: show task\n");
     printf("-at: start automatic test\n");
@@ -30,12 +30,15 @@ void v(void) {
 int main(int argc, char** argv) {
     int showroots = 0, showiters = 0, showall = 0;
     if (argc) {
+        int d[] = {0, 0, 0};
         for (int i = 0; i < argc;i++) {
             if (strcmp("-iters", argv[i]) == 0) {
                 showiters = 1;
+                d[0] = 1;
             }
             if (strcmp("-roots", argv[i]) == 0) {
                 showroots = 1;
+                d[1] = 1;
             }
             if (strcmp("-help", argv[i]) == 0) {
                 help();
@@ -44,35 +47,48 @@ int main(int argc, char** argv) {
             if (strcmp("-test", argv[i]) == 0) {
                 if (i + 5 < argc) {
                     int n = 0;
-                    for (int j = 0;j < strlen(argv[i+2]);j++) {
+                    for (int j = 0;j < (int)strlen(argv[i+2]);j++) {
+                        if (argv[i+1][j] > '9' || argv[i+1][j] < '0') {
+                            printf("Error: n is NaN");
+                            return 0;
+                        }
                         n = 10 * n + argv[i+1][j] - '0';
                     }
-                    printf("!!%d!!!", n);
+                    if (n < 1 || n > 3) {
+                        printf("Error: wrong n value");
+                        return 0;
+                    }
                     char *end;
                     double a = strtod(argv[i+3], &end);
                     if (a == 0) {
-                        printf("Error");
+                        printf("Error: a is NaN");
                         return 0;
                     }
                     double b = strtod(argv[i+4], &end);
                     if (b == 0) {
-                        printf("Error");
+                        printf("Error: b is NaN");
                         return 0;
                     }
                     double eps = strtod(argv[i+5], &end);
                     if (eps == 0) {
-                        printf("Error");
+                        printf("Error: eps is NaN");
                         return 0;
                     }
                     test(argv[i+1], n, a, b, eps);
+                    return 0;
                 }
+                else
+                    printf("Error: not enough arguments");
                 return 0;
             }
             if (strcmp("-allfuncs", argv[i]) == 0) {
                 showall = 1;
             }
             if (strcmp("-v", argv[i]) == 0) {
-                v();
+                if (!d[2]) {
+                    v();
+                    d[2] = 1;
+                }
             }
             if (strcmp("-at", argv[i]) == 0) {
                 atest();
