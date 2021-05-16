@@ -5,7 +5,7 @@ GLOBAL f3
 f3:
     push ebp
     mov ebp, esp
-    finit   
+    finit
     fld qword[esp + 8]
     fchs
     fldl2e
