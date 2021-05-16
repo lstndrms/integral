@@ -148,4 +148,7 @@ void test(char* type, int n, double a, double b, double eps) {
                 printf("Error\n");
         }
     }
+    else {
+        printf("Error: wrong type value");
+    }
 }
