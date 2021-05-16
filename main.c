@@ -17,6 +17,8 @@ void help(void) {
     printf("-iters: show number of iterations\n");
     printf("-roots: show all roots\n");
     printf("-test [type{1, 2}, number of func{1, 2, 3}, a, b ,eps]: call test\n");
+    printf("Test type: \n\t1: root\n\t2: integral\n");
+    printf("Options are: \n\t1: x^2+3x+1=1/x\n\t2: 1/x=cosx\n\t3: cosx=x^2+3x+1\n");
     printf("-allfuncs: show all funcs\n");
     printf("-v: show task\n");
     printf("-at: start automatic test\n");
@@ -48,37 +50,47 @@ int main(int argc, char** argv) {
                 if (i + 5 < argc) {
                     int n = 0;
                     for (int j = 0;j < (int)strlen(argv[i+2]);j++) {
-                        if (argv[i+1][j] > '9' || argv[i+1][j] < '0') {
-                            printf("Error: n is NaN");
+                        if (argv[i+2][j] > '9' || argv[i+2][j] < '0') {
+                            printf("Error: n is NaN\n");
                             return 0;
                         }
-                        n = 10 * n + argv[i+1][j] - '0';
+                        n = 10 * n + argv[i+2][j] - '0';
+                    }
+                    for (int j = 0;j < (int)strlen(argv[i+3]);j++) {
+                        if ((argv[i+3][j] > '9' || argv[i+3][j] < '0') & (argv[i+3][j] != '.')) {
+                            printf("Error: a is NaN\n");
+                            return 0;
+                        }
+                    }
+                    for (int j = 0;j < (int)strlen(argv[i+4]);j++) {
+                        if ((argv[i+4][j] > '9' || argv[i+4][j] < '0') & (argv[i+4][j] != '.')) {
+                            printf("Error: b is NaN\n");
+                            return 0;
+                        }
+                    }
+                    for (int j = 0;j < (int)strlen(argv[i+5]);j++) {
+                        if ((argv[i+5][j] > '9' || argv[i+5][j] < '0') & (argv[i+5][j] != '.')) {
+                            printf("Error: eps is NaN\n");
+                            return 0;
+                        }
                     }
                     if (n < 1 || n > 3) {
-                        printf("Error: wrong n value");
+                        printf("Error: wrong n value\n");
                         return 0;
                     }
                     char *end;
                     double a = strtod(argv[i+3], &end);
-                    if (a == 0) {
-                        printf("Error: a is NaN");
-                        return 0;
-                    }
                     double b = strtod(argv[i+4], &end);
-                    if (b == 0) {
-                        printf("Error: b is NaN");
-                        return 0;
-                    }
                     double eps = strtod(argv[i+5], &end);
-                    if (eps == 0) {
-                        printf("Error: eps is NaN");
+                    if (eps <= 0) {
+                        printf("Error: eps is NaN\n");
                         return 0;
                     }
                     test(argv[i+1], n, a, b, eps);
                     return 0;
                 }
                 else
-                    printf("Error: not enough arguments");
+                    printf("Error: not enough arguments\n");
                 return 0;
             }
             if (strcmp("-allfuncs", argv[i]) == 0) {
