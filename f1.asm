@@ -4,7 +4,7 @@ GLOBAL f1
 f1:
     push ebp
     mov ebp, esp
-    finit   
+    finit
     fld qword[esp+8]
     fld1
     fsub
