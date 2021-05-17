@@ -9,13 +9,16 @@ double integral(double(*f)(double), double a, double b, double eps) {
     I_h = I_2h = 0;
     double sum_o = 0.0, sum_e = 0.0, sum_old = 0.0;
     double h = (b - a) / n;
+    //count sum f_i sum_o for odd i, sum_e for even i
     for (int i = 1;i < n;i++) {
         if (i & 1)
             sum_o += f(a + h * i);
         else
             sum_e += f(a + h * i);
     }
+    //sum_old sum of f_i, i = 1..n-1
     sum_old = sum_o + sum_e;
+    //Simpson's rule
     I_h = (f(a) + 4 * sum_o + 2 * sum_e + f(b)) * h / 3;
     I_2h = I_h;
     n *= 2;
