@@ -18,7 +18,7 @@ double root(double(*f)(double), double(*g)(double), double a, double b, double e
             iters++;
             f1 = F(f, g, t);
             t = t - f1 / (f1 - f0) * (t - b);
-        } while (fabs(f1) >= eps / 2);
+        } while (F(f, g, t) * F(f, g, t+eps) > 0);
         return t;
     }
     else {
@@ -28,7 +28,7 @@ double root(double(*f)(double), double(*g)(double), double a, double b, double e
             iters++;
             f1 = F(f, g, t);
             t = t - f1 / (f1 - f0) * (t - a);
-        } while (fabs(f1) >= eps / 2);
+        } while (F(f, g, t) * F(f, g, t-eps) > 0);
         return t;
     }
 }
