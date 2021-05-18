@@ -57,19 +57,19 @@ int main(int argc, char** argv) {
                         n = 10 * n + argv[i+2][j] - '0';
                     }
                     for (int j = 0;j < (int)strlen(argv[i+3]);j++) {
-                        if ((argv[i+3][j] > '9' || argv[i+3][j] < '0') & (argv[i+3][j] != '.')) {
+                        if ((argv[i+3][j] > '9' || argv[i+3][j] < '0') & (argv[i+3][j] != '.') & (argv[i+3][j] != '-')) {
                             printf("Error: a is NaN\n");
                             return 0;
                         }
                     }
                     for (int j = 0;j < (int)strlen(argv[i+4]);j++) {
-                        if ((argv[i+4][j] > '9' || argv[i+4][j] < '0') & (argv[i+4][j] != '.')) {
+                        if ((argv[i+4][j] > '9' || argv[i+4][j] < '0') & (argv[i+4][j] != '.' )&( argv[i+4][j] != '-')) {
                             printf("Error: b is NaN\n");
                             return 0;
                         }
                     }
                     for (int j = 0;j < (int)strlen(argv[i+5]);j++) {
-                        if ((argv[i+5][j] > '9' || argv[i+5][j] < '0') & (argv[i+5][j] != '.')) {
+                        if ((argv[i+5][j] > '9' || argv[i+5][j] < '0') & (argv[i+5][j] != '.' )&( argv[i+5][j] != '-')) {
                             printf("Error: eps is NaN\n");
                             return 0;
                         }
@@ -81,9 +81,15 @@ int main(int argc, char** argv) {
                     char *end;
                     double a = strtod(argv[i+3], &end);
                     double b = strtod(argv[i+4], &end);
+                    if (strcmp("1", argv[i+1])==0) {
+                        if (b - a < 0) {
+                            printf("Error: wrong interval values\n");
+                            return 0;
+                        }
+                    }
                     double eps = strtod(argv[i+5], &end);
-                    if (eps <= 0) {
-                        printf("Error: eps is NaN\n");
+                    if (eps < 0) {
+                        printf("Error: wrong eps value\n");
                         return 0;
                     }
                     test(argv[i+1], n, a, b, eps);

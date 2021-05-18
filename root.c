@@ -9,8 +9,9 @@ double F(double(*f)(double), double (*g)(double), double x) {
 }
 
 double root(double(*f)(double), double(*g)(double), double a, double b, double eps) {
-
-    if (((F(f, g, a) > 0) && (F(f, g, (a+b)/2) > (F(f, g, a) + F(f, g, b))/2)) ||
+    if (fabs(a - b) < 1e-6)
+        return (a + b) / 2;
+    else if (((F(f, g, a) > 0) && (F(f, g, (a+b)/2) > (F(f, g, a) + F(f, g, b))/2)) ||
         ((F(f, g, a) < 0) && (F(f, g, (a+b)/2) < (F(f, g, a) + F(f, g, b))/2))) {
         double t = a, f0 = f(b) - g(b), f1;
         iters = 0;
