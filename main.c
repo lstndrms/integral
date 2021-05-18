@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
                         }
                     }
                     double eps = strtod(argv[i+5], &end);
-                    if (eps < 0) {
+                    if (eps <= 0) {
                         printf("Error: wrong eps value\n");
                         return 0;
                     }
